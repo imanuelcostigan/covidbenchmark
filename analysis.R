@@ -25,6 +25,7 @@ hosp <-
 countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "SGP", "DNK", "ISR",
   "JPN", "KOR", "NLD", "NOR", "SWE")
 start_date <- as.Date("2021-09-01")
+country_benchmarked <- "AUS"
 
 # Explore core OWID data
 
@@ -115,13 +116,31 @@ owid_long_tbl <-
     cols = !c("iso_code", "location", "date"),
     names_to = "indicator",
     values_to = "value"
+  ) |>
+  mutate(
+    indicator = as_factor(indicator)
   )
+
+owid_long_tbl |>
+  group_by(iso_code, indicator) |>
+  summarise(n = n(), notna = sum(!is.na(value)))
 
 ggplot(owid_long_tbl, aes(x = date, y = value, colour = iso_code)) +
   geom_point(size = 0.5) +
   facet_wrap(vars(indicator), scales = "free_y") +
-  theme_light()
+  theme_light() +
+  theme(legend.position = "bottom")
 
+
+owid_last_snap <- owid_long_tbl |>
+  filter(date == max(date, na.rm = TRUE) - 3)
+owid_country_bench <- owid_last_snap |>
+  filter(iso_code == country_benchmarked)
+
+owid_last_snap |>
+  ggplot(aes(x = indicator, y = value)) + geom_boxplot()  +
+  geom_boxplot(data = owid_country_bench, colour = "red") +
+  facet_wrap(vars(indicator), scales = "free")
 
 
 
