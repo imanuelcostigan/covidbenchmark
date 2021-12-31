@@ -64,6 +64,17 @@ owid_long_tbl <-
     icu_patients_per_million,  # stock, not flow.
     new_deaths_smoothed_per_million
   ) |>
+  fill(
+    stringency_index,
+    people_fully_vaccinated_per_hundred,
+    total_boosters_per_hundred,
+    new_tests_smoothed_per_thousand,
+    new_cases_smoothed_per_million,
+    tests_per_case,
+    hosp_patients_per_million,
+    icu_patients_per_million,
+    new_deaths_smoothed_per_million
+  ) |>
   pivot_longer(
     cols = !c("iso_code", "location", "date"),
     names_to = "indicator",
