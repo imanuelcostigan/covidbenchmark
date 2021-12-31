@@ -105,7 +105,15 @@ owid_country_bench <- owid_last_snap |>
 owid_last_snap |>
   ggplot(aes(x = indicator, y = value)) + geom_boxplot()  +
   geom_boxplot(data = owid_country_bench, colour = "red") +
-  facet_wrap(vars(indicator), scales = "free")
+  facet_wrap(vars(indicator), scales = "free") +
+  theme_light() +
+  labs(
+    title = "COVID benchmarking",
+    subtitle = paste0("Comparing ", country_benchmarked, " (red) to ",
+      paste0(countries[countries != country_benchmarked], collapse = ", ")),
+    caption = paste0("Data sourced from Our World in Data. Benchmarked for ",
+      benchmark_date)
+  )
 
 
 
