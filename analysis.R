@@ -5,23 +5,6 @@ library(janitor)
 url <- "https://github.com/owid/covid-19-data/raw/master/public/data/owid-covid-data.csv"
 owid <- read_csv(url)
 
-# Get supplmental, auxilliary, hospitalisation data
-hosp_url <- "https://github.com/owid/covid-19-data/raw/master/public/data/hospitalizations/covid-hospitalizations.csv"
-hosp <- read_csv(hosp_url)
-hosp <-
-  hosp |>
-  pivot_wider(
-    id_cols = c("entity", "iso_code", "date"),
-    names_from = indicator,
-    values_from = value,
-    names_repair = \(x) make_clean_names(x) |> paste0("_aux")
-  ) |>
-  rename(
-    entity = entity_aux,
-    iso_code = iso_code_aux,
-    date = date_aux
-  )
-
 countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "FRA", "AUT", "BEL",
   "SGP", "DNK", "ISR", "ITA", "JPN", "KOR", "NLD", "FIN", "NOR", "SWE", "ESP",
   "CHE")
@@ -58,41 +41,6 @@ owid |>
     names_from = iso_code,
     values_from = not_na
   )
-
-# Explore aux hospitalisation data
-
-hosp |>
-  filter(
-    iso_code %in% countries,
-    date >= start_date
-  ) |>
-  pivot_longer(
-    cols = !c("entity", "iso_code", "date")
-  ) |>
-  group_by(iso_code, name) |>
-  summarise(n = n(), notna = sum(!is.na(value))) |>
-  pivot_wider(
-    id_cols = name,
-    names_from = iso_code,
-    values_from = notna
-  )
-
-# Join core with aux hospitalisatio data
-
-owid_aug <-
-  owid |>
-  left_join(hosp, by = c("iso_code", "location" = "entity", "date")) |>
-  filter(
-    iso_code %in% countries,
-    date >= start_date
-  )
-owid_aug |>
-  select(iso_code, date, contains("icu")) |>
-  filter(iso_code == "GBR")
-
-# Looks like the aux data is already in the core data set. Ignore this going
-# forward
-
 
 owid_long_tbl <-
   owid |>
