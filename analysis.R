@@ -7,6 +7,7 @@ owid <- read_csv(url)
 countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "FRA", "AUT", "BEL",
   "SGP", "DNK", "ISR", "ITA", "JPN", "KOR", "NLD", "FIN", "NOR", "SWE", "ESP",
   "CHE")
+countries <- countries[order(countries)]
 start_date <- as.Date("2021-09-01")
 country_benchmarked <- "AUS"
 
