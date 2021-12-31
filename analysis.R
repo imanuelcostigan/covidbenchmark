@@ -51,6 +51,9 @@ owid_long_tbl <-
     iso_code,
     location,
     date,
+    stringency_index,
+    people_fully_vaccinated_per_hundred,
+    total_boosters_per_hundred,
     # "Tests conducted per new confirmed case of COVID-19, given as a rolling
     #  7-day average (this is the inverse of positive_rate)"
     new_tests_smoothed_per_thousand,
