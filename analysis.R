@@ -22,9 +22,8 @@ hosp <-
     date = date_aux
   )
 
-countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "FRA", "AUT", "BEL",
-  "SGP", "DNK", "ISR", "ITA", "JPN", "KOR", "NLD", "FIN", "NOR", "SWE", "ESP",
-  "CHE")
+countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "SGP", "DNK", "ISR",
+  "JPN", "KOR", "NLD", "NOR", "SWE")
 start_date <- as.Date("2021-09-01")
 
 # Explore core OWID data
