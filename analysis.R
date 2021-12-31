@@ -94,9 +94,11 @@ ggplot(owid_long_tbl, aes(x = date, y = value, colour = iso_code)) +
   theme_light() +
   theme(legend.position = "bottom")
 
-
+# Benchmark data set to the penultimate available date to ensure
+# as much pan-country data coverage as possible.
+benchmark_date <- (owid_long_tbl |> pull(date) |> max(na.rm = TRUE)) - 1
 owid_last_snap <- owid_long_tbl |>
-  filter(date == max(date, na.rm = TRUE) - 3)
+  filter(date == benchmark_date)
 owid_country_bench <- owid_last_snap |>
   filter(iso_code == country_benchmarked)
 
