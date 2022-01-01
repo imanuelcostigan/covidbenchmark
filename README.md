@@ -12,7 +12,8 @@ The most recent benchmark is:
 ``` r
 library(fs)
 library(stringr)
-most_recent_date <- fs::dir_ls("fig/") |>
+most_recent_date <- 
+  fs::dir_ls("fig/") |>
   fs::path_file() |>
   str_extract("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}") |> 
   as.Date() |>
