@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # Get core data
-url <- "https://github.com/owid/covid-19-data/raw/master/public/data/owid-covid-data.csv"
+url <- "https://covid.ourworldindata.org/data/owid-covid-data.csv"
 owid <- read_csv(url)
 
 countries <- c("AUS", "NZL", "USA", "GBR", "CAN", "DEU", "FRA", "AUT", "BEL",
