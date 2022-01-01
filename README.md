@@ -7,7 +7,17 @@ The core code is in the `analysis.R` file. All code and the associated
 runtime environment is encapsulated by `renv` and should be reproducible
 from this.
 
-The most recent benchmark is:
+All data is sourced from [Our World in
+Data](https://github.com/owid/covid-19-data/tree/master/public/data).
+
+Post-processing of this data set includes
+
+1.  Filtering for countries that are part of the OECD (though not all
+    have been included).
+2.  Missing values are filled using the last available value.
+
+The most recent boxplot benchmarking Australia to most other OECD
+countries is presented below:
 
 ``` r
 library(fs)
