@@ -7,7 +7,7 @@ on:
     paths: ['**.Rmd']
   # Also run this every week.
   schedule:
-    0 0 * * SAT
+    - cron: '0 0 * * SAT'
 
 name: render-rmarkdown
 
