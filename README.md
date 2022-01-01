@@ -106,7 +106,7 @@ owid_long_tbl |>
 
     ## Warning: Removed 36 rows containing missing values (geom_point).
 
-![](fig/time-series-1.png)<!-- -->
+![](fig/time-series-1.svg)<!-- -->
 
 And finally, we compare the country of interest to the other countries.
 We do this on the penultimate date that is published by OWID to ensure
@@ -135,4 +135,4 @@ owid_last_snap |>
   )
 ```
 
-![](fig/boxplot-1.png)<!-- -->
+![](fig/boxplot-1.svg)<!-- -->
