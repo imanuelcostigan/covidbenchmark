@@ -148,6 +148,5 @@ owid_last_snap |>
     caption = paste0("Data sourced from Our World in Data. Benchmarked for ",
       benchmark_date, ". Prepared by @imanuelcostigan.")
   )
-
 ```
 
