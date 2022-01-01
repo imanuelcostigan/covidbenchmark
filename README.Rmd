@@ -1,0 +1,37 @@
+---
+title: "COVID benchmark"
+author: "Imanuel Costigan"
+date: "01/01/2022"
+output:
+  md_document:
+    variant: gfm
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
+```
+
+# COVID benchmarking
+
+This repository contains R code that I have used to benchmark a country against
+other countries.
+
+The core code is in the `analysis.R` file. All code and the associated runtime
+environment is encapsulated by `renv` and should be reproducible from this.
+
+The most recent benchmark is:
+
+```{r bench}
+library(fs)
+library(stringr)
+most_recent_date <- fs::dir_ls("fig/") |>
+  fs::path_file() |>
+  str_extract("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}") |> 
+  as.Date() |>
+  max()
+fs::path("fig", paste0("bench_", most_recent_date), ext = "png") |>
+  knitr::include_graphics()
+```
+
