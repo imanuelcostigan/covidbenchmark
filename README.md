@@ -113,7 +113,7 @@ We do this on the penultimate date that is published by OWID to ensure
 data is available across all countries.
 
 ``` r
-benchmark_date <- (owid_long_tbl |> pull(date) |> max(na.rm = TRUE)) - 1
+benchmark_date <- (owid_long_tbl |> pull(date) |> max(na.rm = TRUE))
 owid_last_snap <-
   owid_long_tbl |>
   filter(date == benchmark_date)
