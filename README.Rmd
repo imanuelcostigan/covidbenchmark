@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
   fig.path = "fig/"
 )
 library(tidyverse)
+library(svglite)
 ```
 
 # COVID benchmarking
