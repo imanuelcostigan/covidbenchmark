@@ -12,7 +12,7 @@ editor_options:
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE, 
-  dev = "svg",
+  dev = "svglite",
   fig.path = "fig/"
 )
 library(tidyverse)
@@ -103,7 +103,7 @@ owid_long_tbl <-
 The following compares the country of interest to a selection of the other 
 countries since the `start_date` defined above.
 
-```{r time-series, fig.width = 11, fig.height = 8, dev = c("svg", "png")}
+```{r time-series, fig.width = 11, fig.height = 8, dev = c("svglite", "png")}
 owid_long_tbl |> 
   filter(iso_code %in% smaller_set_of_countries) |>
   ggplot(aes(x = date, y = value, colour = iso_code)) +
@@ -127,7 +127,7 @@ And finally, we compare the country of interest to the other countries. We do
 this on the penultimate date that is published by OWID to ensure data is 
 available across all countries.
 
-```{r boxplot, fig.width = 11, fig.height = 10, dev = c("svg", "png")}
+```{r boxplot, fig.width = 11, fig.height = 10, dev = c("svglite", "png")}
 benchmark_date <- (owid_long_tbl |> pull(date) |> max(na.rm = TRUE)) - 1
 owid_last_snap <-
   owid_long_tbl |>
