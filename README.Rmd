@@ -114,7 +114,7 @@ owid_long_tbl |>
   theme_light() +
   theme(legend.position = "bottom") +
   labs(
-    title = "COVID stats",
+    title = "COVID stats", 
     subtitle = "Time series of COVID stats for select countries",
     x = "Date",
     y = "Value",
