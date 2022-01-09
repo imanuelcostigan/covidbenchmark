@@ -70,7 +70,7 @@ owid_long_tbl <-
     hosp_patients_per_million,
     icu_patients_per_million,
     new_deaths_smoothed_per_million
-  ) |>
+  ) |> 
   pivot_longer(
     cols = !c("iso_code", "location", "date"),
     names_to = "indicator",
@@ -94,7 +94,7 @@ owid_long_tbl |>
   theme_light() +
   theme(legend.position = "bottom") +
   labs(
-    title = "COVID stats",
+    title = "COVID stats", 
     subtitle = "Time series of COVID stats for select countries",
     x = "Date",
     y = "Value",
