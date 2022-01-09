@@ -32,7 +32,7 @@ jobs:
       - name: Render Rmarkdown files on schedule
         if: $${{ !(github.event.pull_request || github.event.push) }}
         run: |
-          RMD_PATH=($(grep '[.]Rmd$'))
+          RMD_PATH=($(ls | grep '[.]Rmd$'))
           Rscript -e 'for (f in commandArgs(TRUE)) if (file.exists(f)) rmarkdown::render(f)' ${RMD_PATH[*]}
       - name: Commit results
         run: |
