@@ -125,29 +125,36 @@ owid_long_tbl |>
 ```
 
 And finally, we compare the country of interest to the other countries. We do
-this on the penultimate date that is published by OWID to ensure data is 
-available across all countries.
+this on the most recent date for which we have data for all countries of 
+interest.
 
 ```{r boxplot, fig.width = 11, fig.height = 10, dev = c("svglite", "png")}
-benchmark_date <- (owid_long_tbl |> pull(date) |> max(na.rm = TRUE))
-owid_last_snap <-
+benchmark_date <- owid_long_tbl |> 
+  group_by(iso_code) |> 
+  summarise(last_date = max(date, na.rm = TRUE)) |> 
+  pull(last_date) |> 
+  min()
+last_benchmark_dates <- benchmark_date - c(14, 7)
+owid_snaps <-
   owid_long_tbl |>
-  filter(date == benchmark_date)
+  filter(date %in% c(last_benchmark_date, benchmark_date)) |> 
+  mutate(date = as.character(date))
 owid_country_of_interest <- 
-  owid_last_snap |>
+  owid_snaps |>
   filter(iso_code == country_of_interest)
-owid_last_snap |>
-  ggplot(aes(x = indicator, y = value)) + geom_boxplot()  +
+owid_snaps |>
+  ggplot(aes(x = date, y = value)) + 
+  geom_boxplot()  +
   geom_boxplot(data = owid_country_of_interest, colour = "red") +
   facet_wrap(vars(indicator), scales = "free") +
   theme_bw() +
-  theme(axis.text.x = element_blank()) +
+  # theme(axis.text.x = element_blank()) +
   labs(
     title = "COVID benchmarking",
     subtitle = paste0("Comparing ", country_of_interest, " (red) to ",
       paste0(countries[countries != country_of_interest], collapse = ", ")),
-    caption = paste0("Data sourced from Our World in Data. Benchmarked for ",
-      benchmark_date, ". Prepared by @imanuelcostigan.")
+    caption = paste("Data sourced from Our World in Data.", 
+      "Prepared by @imanuelcostigan.")
   )
 ```
 
