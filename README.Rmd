@@ -137,7 +137,7 @@ benchmark_date <- owid_long_tbl |>
 last_benchmark_dates <- benchmark_date - c(14, 7)
 owid_snaps <-
   owid_long_tbl |>
-  filter(date %in% c(last_benchmark_date, benchmark_date)) |> 
+  filter(date %in% c(last_benchmark_dates, benchmark_date)) |> 
   mutate(date = as.character(date))
 owid_country_of_interest <- 
   owid_snaps |>
@@ -154,7 +154,8 @@ owid_snaps |>
     subtitle = paste0("Comparing ", country_of_interest, " (red) to ",
       paste0(countries[countries != country_of_interest], collapse = ", ")),
     caption = paste("Data sourced from Our World in Data.", 
-      "Prepared by @imanuelcostigan.")
+      "By @imanuelcostigan. Source:", 
+      "https://github.com/imanuelcostigan/covidbenchmark")
   )
 ```
 
