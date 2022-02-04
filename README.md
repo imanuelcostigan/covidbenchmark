@@ -132,7 +132,6 @@ owid_snaps |>
   geom_boxplot(data = owid_country_of_interest, colour = "red") +
   facet_wrap(vars(indicator), scales = "free") +
   theme_bw() +
-  # theme(axis.text.x = element_blank()) +
   labs(
     title = "COVID benchmarking",
     subtitle = paste0("Comparing ", country_of_interest, " (red) to ",
