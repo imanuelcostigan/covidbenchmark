@@ -104,7 +104,7 @@ owid_long_tbl |>
   )
 ```
 
-    ## Warning: Removed 255 rows containing missing values (geom_point).
+    ## Warning: Removed 36 rows containing missing values (geom_point).
 
 ![](fig/time-series-1.svg)<!-- -->
 
@@ -141,9 +141,5 @@ owid_snaps |>
       "https://github.com/imanuelcostigan/covidbenchmark")
   )
 ```
-
-    ## Warning: Removed 9 rows containing non-finite values (stat_boxplot).
-
-    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
 
 ![](fig/boxplot-1.svg)<!-- -->
